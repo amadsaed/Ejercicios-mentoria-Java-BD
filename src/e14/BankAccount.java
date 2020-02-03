@@ -13,13 +13,16 @@ public class BankAccount {
 
 
     public void mostrarSaldo (){
+        System.out.println("su saldo actual es :");
         System.out.println(saldo);
     }
 
-    public void retirarDinero(double cantidad)  {
+    public void  retirarDinero(double cantidad)  {
 
         try {
             saldo= estado.retirar(saldo,cantidad);
+            System.out.println("usted ha retirado "+ cantidad);
+
             if (saldo==0){
                 estado = new CuentaVacia();
             }
@@ -48,10 +51,11 @@ public class BankAccount {
         estado= new CuentaBloqueada();
     }
 
-    public void depositarDinero (double cantidadADepositar){
+    public void depositarDinero (double  cantidadADepositar){
         try {
             contadorFallidos=0;
             saldo= estado.depositar(saldo,cantidadADepositar);
+            System.out.println("ha depositado " + cantidadADepositar);
             if (estado instanceof CuentaVacia){
                 estado = new CuentaActiva();
             }
