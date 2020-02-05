@@ -2,16 +2,21 @@ package e1;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Grafo {
 
-    private ArrayList<Nodo> nodos ;
+    public ArrayList<Nodo> nodos ;
+
+    public int  idArista ;
+
+
+
 
     public Grafo() {
-    }
-
-    public Grafo(ArrayList<Nodo> nodos) {
-        this.nodos = nodos;
+        this.nodos = new ArrayList<Nodo>();
+        this.idArista=0;
     }
 
     public ArrayList<Nodo> getNodos() {
@@ -19,19 +24,51 @@ public class Grafo {
     }
 
     public void addNodos (Nodo nodo){
-        if(nodos==null){
-            nodos= new ArrayList<>();
-        }
+
         nodos.add(nodo);
 
     }
 
-    public void conectarNodos (Nodo nodoOrigen  ,Nodo nodoDestino){
-        //chequear//
+    public void conectarNodos (Nodo nodoOrigen  , Nodo nodoDestino) {
 
-        Arista arista = new Arista(nodoDestino);
-        nodoOrigen.agregarArista(arista);
+        if (nodos != null) {
+
+            Arista arista = new Arista(this.idArista , nodoDestino);
+            nodoOrigen.agregarArista(arista);
+            this.idArista++;
+        }
 
     }
 
+    public void busquedaAmplitud(Nodo nodoPrimero){
+        int idNextNodo = 0;
+        Queue<Nodo> colaNodos = new LinkedList<Nodo>();
+        Nodo nodo;
+        Grafo grafo = new Grafo();
+        colaNodos.add(nodoPrimero);
+        nodoPrimero.setVisitado(true);
+        Nodo actual;
+        int i ;
+        Nodo next ;
+        while (!colaNodos.isEmpty()){
+            actual= colaNodos.poll();
+            if(!actual.getVisitado()){
+                actual.setVisitado(true);
+            }
+            System.out.println("Nodo actual: " + actual.getId());
+            for (i=0 ; i<actual.getAristas().size(); i++){
+                idNextNodo = actual.getAristas().get(i).getIdNodoDestino().getId();
+                next = this.nodos.get(idNextNodo-1);// nodo con id next de arista
+                System.out.println("Nodo a visitar: " + next.getId());
+                if (next.visitado== false){
+                    next.setVisitado(true);
+                    colaNodos.add(next);
+                }
+            }
+        }
+
+
+
+
+    }
 }

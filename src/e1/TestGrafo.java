@@ -3,11 +3,13 @@ package e1;
 
 public  class TestGrafo {
 
-    public static Grafo  grafo() {
-        Nodo nodo1 = new Nodo(1);
-        Nodo nodo2 = new Nodo(2);
-        Nodo nodo3 = new Nodo(3);
-        Nodo nodo4 = new Nodo(4);
+
+    public static void main(String[] args) {
+
+        Nodo nodo1 = new Nodo(1, "www.facebook.com");
+        Nodo nodo2 = new Nodo(2 ,"www.google.com");
+        Nodo nodo3 = new Nodo(3 , "www.github.com");
+        Nodo nodo4 = new Nodo(4 , "www.instagram.com");
 
         /*
         nodo1.agregarArista(new Arista(1,nodo2,nodo1));
@@ -18,21 +20,26 @@ public  class TestGrafo {
          */
 
         Grafo grafo1 = new Grafo();
-        grafo1.conectarNodos(nodo1,nodo2);
+
         grafo1.addNodos(nodo1);
         grafo1.addNodos(nodo2);
         grafo1.addNodos(nodo3);
         grafo1.addNodos(nodo4);
 
-        return grafo1;
-    }
 
-    public static void main(String[] args) {
+        grafo1.conectarNodos(nodo1,nodo2);
+        grafo1.conectarNodos(nodo2,nodo4);
+        grafo1.conectarNodos(nodo4,nodo3);
+        grafo1.conectarNodos(nodo3,nodo1);
 
-        Grafo grafo = grafo();
-        System.out.println(grafo);
+/*
+        for (Nodo n : grafo1.getNodos()){
+            System.out.println(n.muestrar());
+        }
 
+ */
 
+        grafo1.busquedaAmplitud(nodo1);
 
     }
 

@@ -42,5 +42,9 @@ public class Arista {
         this.NodoDestino = idNodoDestino;
     }
 
+    public String toString(){
+        return "Id Arista :" + this.id+ "Id Nodo Destino :"+ this.NodoDestino.getId();
+    }
+
 
 }

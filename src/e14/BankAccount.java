@@ -21,7 +21,6 @@ public class BankAccount {
 
         try {
             saldo= estado.retirar(saldo,cantidad);
-            System.out.println("usted ha retirado "+ cantidad);
 
             if (saldo==0){
                 estado = new CuentaVacia();
