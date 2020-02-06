@@ -31,6 +31,7 @@ public  class TestGrafo {
         grafo1.conectarNodos(nodo2,nodo4);
         grafo1.conectarNodos(nodo4,nodo3);
         grafo1.conectarNodos(nodo3,nodo1);
+        grafo1.conectarNodos(nodo2,nodo1);
 
 /*
         for (Nodo n : grafo1.getNodos()){

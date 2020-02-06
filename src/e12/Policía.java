@@ -4,7 +4,7 @@ public class Policía extends Emergencia {
 
     public Policía (){
         super();
-        this.id=2;
+        this.id=-1;
 
     }
 }

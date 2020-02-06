@@ -24,6 +24,7 @@ public class Nodo {
         this.name=name;
     }
 
+
     public Nodo() {
         this.aristas = new ArrayList<Arista>();
     }
@@ -60,6 +61,14 @@ public class Nodo {
     }
     public String muestrar(){
         return "Id Nodo :" + this.id + ", Aristas :"+ this.aristas.toString();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

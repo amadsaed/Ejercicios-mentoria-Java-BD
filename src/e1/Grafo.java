@@ -55,11 +55,11 @@ public class Grafo {
             if(!actual.getVisitado()){
                 actual.setVisitado(true);
             }
-            System.out.println("Nodo actual: " + actual.getId());
+            System.out.println("Nodo actual: " + actual.getName());
             for (i=0 ; i<actual.getAristas().size(); i++){
                 idNextNodo = actual.getAristas().get(i).getIdNodoDestino().getId();
                 next = this.nodos.get(idNextNodo-1);// nodo con id next de arista
-                System.out.println("Nodo a visitar: " + next.getId());
+                System.out.println("Nodo a visitar: " + next.getName());
                 if (next.visitado== false){
                     next.setVisitado(true);
                     colaNodos.add(next);
