@@ -1,17 +1,13 @@
 package e1;
 
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Grafo {
 
     public ArrayList<Nodo> nodos ;
 
     public int  idArista ;
-
-
 
 
     public Grafo() {
@@ -40,29 +36,53 @@ public class Grafo {
 
     }
 
+
+
+
     public void busquedaAmplitud(Nodo nodoPrimero){
-        int idNextNodo = 0;
+
+            int idNextNodo = 0;
+
         Queue<Nodo> colaNodos = new LinkedList<Nodo>();
+
         Nodo nodo;
+
         Grafo grafo = new Grafo();
+
+        Map<String, Nodo> mapaNodosVisitados = new HashMap();
+
         colaNodos.add(nodoPrimero);
-        nodoPrimero.setVisitado(true);
-        Nodo actual;
+
+        mapaNodosVisitados.put("0",nodoPrimero);
+
+
+        Nodo nodoActual = null;
+
         int i ;
-        Nodo next ;
+
+        Nodo nodoNext ;
+
         while (!colaNodos.isEmpty()){
-            actual= colaNodos.poll();
-            if(!actual.getVisitado()){
-                actual.setVisitado(true);
+
+            nodoActual= colaNodos.poll();
+
             }
-            System.out.println("Nodo actual: " + actual.getName());
-            for (i=0 ; i<actual.getAristas().size(); i++){
-                idNextNodo = actual.getAristas().get(i).getIdNodoDestino().getId();
-                next = this.nodos.get(idNextNodo-1);// nodo con id next de arista
-                System.out.println("Nodo a visitar: " + next.getName());
-                if (next.visitado== false){
-                    next.setVisitado(true);
-                    colaNodos.add(next);
+
+            System.out.println("Nodo actual: " + nodoActual.getName());
+
+            for (i=0 ; i<nodoActual.getAristas().size(); i++){
+
+                idNextNodo = nodoActual.getAristas().get(i).getIdNodoDestino().getId();
+
+                nodoNext = this.nodos.get(idNextNodo-1);// nodo con id next de arista
+
+                System.out.println("Nodo a visitar: " + nodoNext.getName());
+
+                if (nodoNext.getName() != mapaNodosVisitados.get("0").getName()){
+
+                    mapaNodosVisitados.replace("0",nodoNext);
+
+                    colaNodos.add(nodoNext);
                 }
             }
         }
@@ -71,4 +91,4 @@ public class Grafo {
 
 
     }
-}
+

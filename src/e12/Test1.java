@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-public  class Test {
+public  class Test1 {
 
     int contadorTarrifas = 0;
 
@@ -30,7 +30,7 @@ public  class Test {
                 vehiculo = new Bombero();
                 break;
             case 2:
-                vehiculo = new Policía();
+                vehiculo = new Policia();
                 break;
             case 3:
                 vehiculo = new Moto();
@@ -64,7 +64,6 @@ public  class Test {
         if (n2 >= 0.5){
 
             Thread.sleep(sleep);
-
 
             for (int i =0 ; i < n3 ; i++){
 
@@ -139,7 +138,7 @@ public  class Test {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Test test= new Test();
+        e12.Test1 test= new e12.Test1();
 
             final long EXECUTION_TIME = 2;
 

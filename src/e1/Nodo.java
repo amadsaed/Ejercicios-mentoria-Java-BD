@@ -9,16 +9,6 @@ public class Nodo {
     private ArrayList<Arista> aristas;
     private String name;
 
-    public boolean getVisitado() {
-        return visitado;
-    }
-
-    public void setVisitado(boolean visitado){
-        this.visitado = visitado;
-    }
-
-    public boolean visitado ;
-
     public Nodo(int id , String name) {
         this.id = id;
         this.name=name;
@@ -29,9 +19,8 @@ public class Nodo {
         this.aristas = new ArrayList<Arista>();
     }
 
-    public Nodo(int id , boolean visitado ,ArrayList<Arista> aristas) {
+    public Nodo(int id  ,ArrayList<Arista> aristas) {
         this.id = id;
-        this.visitado= false;
         this.aristas = aristas;
     }
 
