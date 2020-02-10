@@ -39,9 +39,9 @@ public class Grafo {
 
 
 
-    public void busquedaAmplitud(Nodo nodoPrimero){
+    public void busquedaAmplitud(Nodo nodoPrimero) {
 
-            int idNextNodo = 0;
+        int idNextNodo = 0;
 
         Queue<Nodo> colaNodos = new LinkedList<Nodo>();
 
@@ -53,42 +53,43 @@ public class Grafo {
 
         colaNodos.add(nodoPrimero);
 
-        mapaNodosVisitados.put("0",nodoPrimero);
+        mapaNodosVisitados.put("0", nodoPrimero);
 
+        Nodo nodoActual ;
 
-        Nodo nodoActual = null;
+        int i;
 
-        int i ;
+        Nodo nodoNext;
 
-        Nodo nodoNext ;
+        while (!colaNodos.isEmpty()) {
 
-        while (!colaNodos.isEmpty()){
+            nodoActual = colaNodos.poll();
 
-            nodoActual= colaNodos.poll();
-
+            if (nodoActual.getName() != mapaNodosVisitados.get("0").getName()) {
+                mapaNodosVisitados.replace("0", nodoActual);
             }
+
 
             System.out.println("Nodo actual: " + nodoActual.getName());
 
-            for (i=0 ; i<nodoActual.getAristas().size(); i++){
+            for (i = 0; i < nodoActual.getAristas().size(); i++) {
 
                 idNextNodo = nodoActual.getAristas().get(i).getIdNodoDestino().getId();
 
-                nodoNext = this.nodos.get(idNextNodo-1);// nodo con id next de arista
+                nodoNext = this.nodos.get(idNextNodo -1);// nodo con id next de arista
 
                 System.out.println("Nodo a visitar: " + nodoNext.getName());
 
-                if (nodoNext.getName() != mapaNodosVisitados.get("0").getName()){
+                if (nodoNext.getName() != mapaNodosVisitados.get("0").getName()) {
 
-                    mapaNodosVisitados.replace("0",nodoNext);
+                    mapaNodosVisitados.replace("0", nodoNext);
 
                     colaNodos.add(nodoNext);
                 }
             }
         }
 
-
-
-
     }
+
+}
 
