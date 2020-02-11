@@ -1,6 +1,5 @@
 package e1;
 
-
 import java.util.*;
 
 public class Grafo {
@@ -49,11 +48,10 @@ public class Grafo {
 
         Grafo grafo = new Grafo();
 
-        Map<String, Nodo> mapaNodosVisitados = new HashMap();
+        Map<Integer, Nodo> mapaNodosVisitados = new HashMap();
 
         colaNodos.add(nodoPrimero);
 
-        mapaNodosVisitados.put("0", nodoPrimero);
 
         Nodo nodoActual ;
 
@@ -65,28 +63,84 @@ public class Grafo {
 
             nodoActual = colaNodos.poll();
 
-            if (nodoActual.getName() != mapaNodosVisitados.get("0").getName()) {
-                mapaNodosVisitados.replace("0", nodoActual);
-            }
+            if (!mapaNodosVisitados.containsKey(nodoActual.getId())) {
 
+                mapaNodosVisitados.put(nodoActual.getId(), nodoActual);
 
-            System.out.println("Nodo actual: " + nodoActual.getName());
+                System.out.println("Nodo actual: " + nodoActual.getName());
 
-            for (i = 0; i < nodoActual.getAristas().size(); i++) {
+                for (i = 0; i < nodoActual.getAristas().size(); i++) {
 
-                idNextNodo = nodoActual.getAristas().get(i).getIdNodoDestino().getId();
+                    idNextNodo = nodoActual.getAristas().get(i).getIdNodoDestino().getId();
 
-                nodoNext = this.nodos.get(idNextNodo -1);// nodo con id next de arista
+                    nodoNext = this.nodos.get(idNextNodo -1);// nodo con id next de arista
 
-                System.out.println("Nodo a visitar: " + nodoNext.getName());
-
-                if (nodoNext.getName() != mapaNodosVisitados.get("0").getName()) {
-
-                    mapaNodosVisitados.replace("0", nodoNext);
+                  //  System.out.println("Nodo a visitar: " + nodoNext.getName());
 
                     colaNodos.add(nodoNext);
+
                 }
+
+            }else {
+
+                System.out.println(nodoActual.getName() + " fue visitado !");
             }
+
+
+        }
+
+    }
+
+
+    public void busquedaPofundidad(Nodo nodoPrimero) {
+
+        int idNextNodo = 0;
+
+        Stack<Nodo> pilaNodos = new Stack<>();
+
+        Nodo nodo;
+
+        Grafo grafo = new Grafo();
+
+        Map<Integer, Nodo> mapaNodosVisitados = new HashMap();
+
+        pilaNodos.push(nodoPrimero);
+
+
+        Nodo nodoActual ;
+
+        int i;
+
+        Nodo nodoNext;
+
+        while (!pilaNodos.isEmpty()) {
+
+            nodoActual = pilaNodos.pop();
+
+            if (!mapaNodosVisitados.containsKey(nodoActual.getId())) {
+
+                mapaNodosVisitados.put(nodoActual.getId(), nodoActual);
+
+                System.out.println("Nodo actual: " + nodoActual.getName());
+
+                for (i = 0; i < nodoActual.getAristas().size(); i++) {
+
+                    idNextNodo = nodoActual.getAristas().get(i).getIdNodoDestino().getId();
+
+                    nodoNext = this.nodos.get(idNextNodo -1);// nodo con id next de arista
+
+                  //  System.out.println("Nodo a visitar: " + nodoNext.getName());
+
+                    pilaNodos.push(nodoNext);
+
+                }
+
+            }else {
+
+                System.out.println(nodoActual.getName() + " fue visitado !");
+            }
+
+
         }
 
     }
