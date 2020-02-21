@@ -48,8 +48,6 @@ public class HiloCreadorVehiculos extends Thread {
 
     public  void agregarVehiculo(Vehiculo vehiculo){
         Test.cola.add(vehiculo);
-
-
     }
 
     public void run(){

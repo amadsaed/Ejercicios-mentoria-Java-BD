@@ -8,7 +8,6 @@ public class Grafo {
 
     public int  idArista ;
 
-
     public Grafo() {
         this.nodos = new ArrayList<Nodo>();
         this.idArista=0;
@@ -27,10 +26,12 @@ public class Grafo {
     public void conectarNodos (Nodo nodoOrigen  , Nodo nodoDestino) {
 
         if (nodos != null) {
-
             Arista arista = new Arista(this.idArista , nodoDestino);
-            nodoOrigen.agregarArista(arista);
             this.idArista++;
+            Arista arista2 = new Arista(this.idArista , nodoOrigen);
+            this.idArista++;
+            nodoDestino.agregarArista(arista2);
+            nodoOrigen.agregarArista(arista);
         }
 
     }
@@ -52,7 +53,6 @@ public class Grafo {
 
         colaNodos.add(nodoPrimero);
 
-
         Nodo nodoActual ;
 
         int i;
@@ -67,15 +67,13 @@ public class Grafo {
 
                 mapaNodosVisitados.put(nodoActual.getId(), nodoActual);
 
-                System.out.println("Nodo actual: " + nodoActual.getName());
+                System.out.println("Nodo actual: " + nodoActual.getName() + "   id" +" "+ nodoActual.getId() );
 
                 for (i = 0; i < nodoActual.getAristas().size(); i++) {
 
                     idNextNodo = nodoActual.getAristas().get(i).getIdNodoDestino().getId();
 
                     nodoNext = this.nodos.get(idNextNodo -1);// nodo con id next de arista
-
-                  //  System.out.println("Nodo a visitar: " + nodoNext.getName());
 
                     colaNodos.add(nodoNext);
 
@@ -92,7 +90,7 @@ public class Grafo {
     }
 
 
-    public void busquedaPofundidad(Nodo nodoPrimero) {
+    public void busquedaProfundidad(Nodo nodoPrimero) {
 
         int idNextNodo = 0;
 
@@ -139,7 +137,6 @@ public class Grafo {
 
                 System.out.println(nodoActual.getName() + " fue visitado !");
             }
-
 
         }
 

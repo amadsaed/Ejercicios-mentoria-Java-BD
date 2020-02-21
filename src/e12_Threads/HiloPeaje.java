@@ -14,11 +14,11 @@ public class HiloPeaje extends Thread {
 
     public int calcularGanancia (){
 
-        if (!Test.cola.isEmpty()){
+
             Vehiculo v = Test.cola.poll();
             Test.contadorTarrifas += v.getTarrifa();
             System.out.println("cobrando "+ v + " "+ v.getTarrifa());
-        }
+
 
         return Test.contadorTarrifas;
     }

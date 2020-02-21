@@ -45,10 +45,6 @@ public  class TestGrafo {
         grafo1.conectarNodos(nodo3,nodo5);
         grafo1.conectarNodos(nodo5,nodo1);
 
-
-
-
-
 /*
         for (Nodo n : grafo1.getNodos()){
             System.out.println(n.muestrar());
@@ -59,7 +55,7 @@ public  class TestGrafo {
         grafo1.busquedaAmplitud(nodo1);
 
         System.out.println("============================================================================");
-        grafo1.busquedaPofundidad(nodo1);
+        grafo1.busquedaProfundidad(nodo1);
 
     }
 
