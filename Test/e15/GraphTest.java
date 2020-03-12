@@ -9,14 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GraphTest {
 
     private static Graph graph;
+    private static UserInfoBo userInfoBo;
+    private static UserInfoDTO userInfoDTO;
 
     @BeforeAll
     public static void initializeGraph(){
         graph = new Graph();
-        Node node= new Node(1, "amad", "siria", "26","programmer" , "single");
+        userInfoDTO= new UserInfoDTO();
+        userInfoDTO.setId(1);
+        userInfoDTO.setName("amad");
+        userInfoBo= new UserInfoBo(1, "amad", "siria","26","programmer", "single");
+        userInfoBo.setUserInfoDTO(userInfoDTO);
+        Node node= new Node(userInfoBo);
         graph.addNodes(node);
-        Node node1= new Node(2,"Ramiro" ,"argentina","21","programmador" ,"single");
-        graph.addNodes(node1);
     }
     @Test
     public void searchAmplitudeTest () throws NotFoundUserException {
@@ -25,7 +30,7 @@ public class GraphTest {
     }
     @Test()
     public void searchAmplitudeExpectedNotFoundUserTest (){
-        Assertions.assertThrows(NotFoundUserException.class,() -> graph.searchAmplitude("amad", 3) );
+        Assertions.assertThrows(NotFoundUserException.class,() -> graph.searchAmplitude("rami", 0) );
 
     }
 }

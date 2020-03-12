@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FileDAOTest {
 
@@ -21,8 +20,7 @@ public class FileDAOTest {
 
     @Test
     public void readCsvFileTest() throws IOException {
-        int i ;
-        assertEquals("Lionel Messi",fileDAO.readCsvFile().get(0).getName());
+        assertFalse(fileDAO.readCsvFile().isEmpty());
     }
 
 }

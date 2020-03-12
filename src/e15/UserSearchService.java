@@ -27,11 +27,9 @@ public class UserSearchService {
         Map<Integer , List<String> > friendsMap = new HashMap<>();
         for(int i=0 ; i<userInfoList.size() ; i++){
             Node node = new Node();
-            node.setAge(userInfoList.get(i).getAge());
-            node.setId(userInfoList.get(i).getId());
-            node.setName(userInfoList.get(i).getName());
-            node.setNationality(userInfoList.get(i).getNationality());
-            node.setRelationship(userInfoList.get(i).getRelationship());
+            UserInfoBo userInfoBo = new UserInfoBo();
+            userInfoBo.setUserInfoDTO(userInfoList.get(i));
+            node.setUserInfoBo(userInfoBo);
             friendsMap.put(userInfoList.get(i).getId(), userInfoList.get(i).getFriends());
             graph.addNodes(node);
         }

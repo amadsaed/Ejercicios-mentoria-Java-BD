@@ -12,12 +12,18 @@ public class CacheMemoryTest {
 
     private static CacheMemory cacheMemory;
     private static Node node;
+    private static UserInfoBo userInfoBo;
+    private static UserInfoDTO userInfoDTO;
 
     @BeforeAll
     public static void setAttributes(){
-        node =new Node(1, "amad", "siria", "26","programmer" , "single");
+        userInfoDTO= new UserInfoDTO();
+        userInfoDTO.setName("amad");
+        userInfoBo= new UserInfoBo(1,"amad","siria","26","programacion","single");
+        userInfoBo.setUserInfoDTO(userInfoDTO);
+        node =new Node(userInfoBo);
         cacheMemory = new CacheMemory();
-        cacheMemory.addToMemory(node.getName(),node);
+        cacheMemory.addToMemory("amad",node);
     }
 
     @Test

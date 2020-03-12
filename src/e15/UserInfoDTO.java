@@ -77,6 +77,8 @@ public class UserInfoDTO {
         friends.add(friend);
     }
 
+
+
     public String toString(){
         return "id: " + this.id +
                 " Nombre: " + this.name +
