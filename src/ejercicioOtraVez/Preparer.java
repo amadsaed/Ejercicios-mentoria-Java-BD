@@ -1,5 +1,5 @@
 package ejercicioOtraVez;
 
-public class Preparer {
+public class Preparer extends Thread{
 
 }
