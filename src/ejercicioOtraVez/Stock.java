@@ -12,16 +12,6 @@ public class Stock {
         this.stockQuantity = stock;
     }
 
-    public List<Stock> generateStocks(){
-       List<Stock> stocks = new ArrayList<Stock>();
-       stocks.add(new Stock(1, 20));
-       stocks.add(new Stock(2, 20));
-       stocks.add(new Stock(3, 15));
-       stocks.add(new Stock(4, 15));
-       stocks.add(new Stock(5, 10));
-       return stocks;
-    }
-
     public int getIdSandwich() {
         return idSandwich;
     }

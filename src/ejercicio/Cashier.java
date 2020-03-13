@@ -64,6 +64,8 @@ public class Cashier extends Employee{
         }
     }
 
+
+
     public String selectTypePay(int type) {
         if(type == 1) {
             return "cash";

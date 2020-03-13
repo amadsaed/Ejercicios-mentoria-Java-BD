@@ -18,8 +18,8 @@ public class CashBox {
 
     public int calculateTotal(){
         int total = 0;
-        for (int i = 0 ; i< tickets.size() ; i++){
-           total+= tickets.get(i).getAmount();
+        for (int i = 0 ; i < tickets.size() ; i++){
+           total += tickets.get(i).getAmount();
         }
         return total;
     }

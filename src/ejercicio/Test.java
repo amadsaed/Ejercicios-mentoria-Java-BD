@@ -7,7 +7,7 @@ public class Test {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        BlockingQueue<Ticket> tickets = new ArrayBlockingQueue<Ticket>(1024);
+      /*  BlockingQueue<Ticket> tickets = new ArrayBlockingQueue<Ticket>(1024);
         BlockingQueue<Client> clients = new ArrayBlockingQueue<Client>(1024);
         BlockingQueue<Client> waitClients = new ArrayBlockingQueue<Client>(1024);
 
@@ -17,7 +17,7 @@ public class Test {
 
         clientGenerator.start();
         cashier.start();
-        preparer.start();
+        preparer.start();*/
 
     }
 

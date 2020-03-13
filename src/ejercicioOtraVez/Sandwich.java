@@ -21,4 +21,41 @@ public class Sandwich {
         this.ingredients.add(ingredient);
     }
 
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Boolean getReady() {
+        return isReady;
+    }
+
+    public void setReady(Boolean ready) {
+        isReady = ready;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getIdSandwich() {
+        return idSandwich;
+    }
+
+    public void setIdSandwich(int idSandwich) {
+        this.idSandwich = idSandwich;
+    }
+
+    public String toString(){
+        return this.idSandwich +
+                " $" + this.price;
+    }
 }
