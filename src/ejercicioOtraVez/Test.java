@@ -10,11 +10,22 @@ public class Test {
 
     public static void main(String[] args) {
 
+        int cantClients = clientsRandom();
         BlockingQueue<Order> orders = new ArrayBlockingQueue<Order>(1024);
         BlockingQueue<Client> clients = new ArrayBlockingQueue<Client>(1024);
 
-        Cashier cashier = new Cashier(orders, clients, generateStocks(), generateSandwiches());
+        ClientGenerator generator = new ClientGenerator(clients, cantClients);
+        Cashier cashier = new Cashier(orders, clients, generateStocks(), generateSandwiches(), cantClients);
+        Preparer preparer = new Preparer(orders, cantClients);
 
+        generator.start();
+        cashier.start();
+        preparer.start();
+
+    }
+
+    private static int clientsRandom() {
+        return (int)(Math.random()*(40-1+1)+1);
     }
 
 

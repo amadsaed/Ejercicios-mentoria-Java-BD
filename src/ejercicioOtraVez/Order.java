@@ -6,7 +6,7 @@ public class Order {
 
     private List<Sandwich> sandwiches;
     private Ticket ticket;
-    private Boolean isReady;
+    private boolean isReady;
 
     public Order(List<Sandwich> sandwiches, Ticket ticket) {
         this.sandwiches = sandwiches;
@@ -14,4 +14,11 @@ public class Order {
         this.isReady = false;
     }
 
+    public void setReady(boolean ready) {
+        isReady = ready;
+    }
+
+    public List<Sandwich> getSandwiches() {
+        return sandwiches;
+    }
 }
