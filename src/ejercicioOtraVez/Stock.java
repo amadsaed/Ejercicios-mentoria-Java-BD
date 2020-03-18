@@ -1,15 +1,17 @@
 package ejercicioOtraVez;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Stock {
+
     private int idSandwich;
     private int stockQuantity;
 
     public Stock(int id, int stock){
         this.idSandwich = id;
         this.stockQuantity = stock;
+    }
+
+    public void decreaseQuantity() {
+        this.stockQuantity -= 1;
     }
 
     public int getIdSandwich() {

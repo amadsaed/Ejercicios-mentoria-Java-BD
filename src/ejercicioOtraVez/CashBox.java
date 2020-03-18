@@ -1,10 +1,15 @@
 package ejercicioOtraVez;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CashBox {
 
     private List<Ticket> tickets;
+
+    public CashBox() {
+        this.tickets = new ArrayList<>();
+    }
 
     public Ticket generateTicket(int amount, String typePay){
         Ticket ticket = new Ticket(amount, typePay);
@@ -23,4 +28,7 @@ public class CashBox {
         }
         return total;
     }
+     public String toString(){
+        return "$" + this.calculateTotal();
+     }
 }

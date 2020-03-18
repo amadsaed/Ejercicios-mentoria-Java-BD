@@ -7,6 +7,7 @@ public class Preparer extends Thread{
     private BlockingQueue<Order> orders;
     private int cantClients;
 
+
     public Preparer(BlockingQueue<Order> orders, int cantClients){
         this.orders = orders;
         this.cantClients = cantClients;
@@ -14,10 +15,13 @@ public class Preparer extends Thread{
 
     @Override
     public void run(){
-        for(int i = 0; i < cantClients; i++){
+        int i = 0;
+
+        while(i < cantClients && ContextExecute.continued){
             while (this.orders.isEmpty()) {
             }
             deliverOrder(this.orders.poll());
+            i++;
         }
 
     }

@@ -4,7 +4,6 @@ import java.util.concurrent.BlockingQueue;
 
 public class ClientGenerator extends Thread{
 
-
     private BlockingQueue<Client> clients;
     private int cantClients;
 
@@ -15,8 +14,11 @@ public class ClientGenerator extends Thread{
 
     @Override
     public void run() {
-        for(int i = 0; i < cantClients; i++) {
+        int i = 0;
+
+        while(i < cantClients && ContextExecute.continued) {
             this.clients.add(new Client(cashRandom()));
+            i++;
             time();
         }
     }
@@ -40,5 +42,6 @@ public class ClientGenerator extends Thread{
     public void setClients(BlockingQueue<Client> clients) {
         this.clients = clients;
     }
+
 
 }

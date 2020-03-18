@@ -1,10 +1,9 @@
 package ejercicioOtraVez;
 
-import ejercicio.NotEnoughCashException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 public class Cashier extends Thread{
@@ -12,11 +11,11 @@ public class Cashier extends Thread{
     private BlockingQueue<Order> orders;
     private BlockingQueue<Client> clients;
     private CashBox cashBox;
-    private List<Stock> stocks;
-    private List<Sandwich> sandwiches;
+    private Map<Integer, Stock> stocks;
+    private Map<Integer, Sandwich> sandwiches;
     private int cantClients;
 
-    public Cashier(BlockingQueue<Order> orders, BlockingQueue<Client> clients, List<Stock> stocks, List<Sandwich> sandwiches, int cantClients) {
+    public Cashier(BlockingQueue<Order> orders, BlockingQueue<Client> clients, Map<Integer, Stock> stocks, Map<Integer, Sandwich> sandwiches, int cantClients) {
         this.orders = orders;
         this.clients = clients;
         this.cashBox = new CashBox();
@@ -26,14 +25,15 @@ public class Cashier extends Thread{
     }
 
     @Override
-    public void run(){
+    public void run() {
         List<Sandwich> mySandwiches;
         Client client;
         Sandwich sandwich;
-        Order order;
-        String typePay;
+        boolean existStock = false;
         int num;
-        for(int j = 0; j < cantClients; j++){
+        int j = 0;
+
+        while(j < cantClients && ContextExecute.continued){
             int totalAmount = 0;
             while(this.clients.isEmpty()){
             }
@@ -44,64 +44,78 @@ public class Cashier extends Thread{
             System.out.println("Select the sandwich that you want");
             showMenu();
             for(int i = 0; i < num; i++){
-                sandwich = selectSandwich(sandwichRandom());
-                decreaseStock(sandwich);
-                totalAmount += sandwich.getPrice();
-                mySandwiches.add(sandwich);
+                do {
+                    try {
+                        sandwich = selectSandwich(sandwichRandom());
+                        if(sandwich == null) {
+                            existStock = false;
+                        }else {
+                            existStock = true;
+                            decreaseStock(sandwich);
+                            totalAmount += sandwich.getPrice();
+                            mySandwiches.add(sandwich);
+                        }
+                    } catch (NoMoreStockException e) {
+                        System.out.println(e.getMessage());
+                        ContextExecute.continued = false;
+                    }
+                }while(!existStock);
             }
-            System.out.println("How do you want to pay?");
-            typePay = client.typePayRandom();
-            try {
-                this.sendOrder(new Order(mySandwiches, charge(typePay, client.pay(typePay, totalAmount))));
-            } catch (NotEnoughCashException e) {
-                System.out.println(e.getMessage());
-            }
+            System.out.println("The total amount is $" + totalAmount);
+            this.sendOrder(new Order(mySandwiches, charge(client.pay(totalAmount), client.showPay())));
+            j++;
         }
+        System.out.println("The cashbox have: " + this.cashBox + " pesos");
     }
 
+
     private void decreaseStock(Sandwich sandwich) {
-        int i = 0;
-        int quantity;
-        while(i < this.stocks.size() && sandwich.getIdSandwich() != this.stocks.get(i).getIdSandwich()){
-            i++;
+        Stock stock;
+
+        stock = this.stocks.get(sandwich.getIdSandwich());
+        stock.decreaseQuantity();
+        if(stock.getStockQuantity() == 0) {
+            this.stocks.remove(stock.getIdSandwich());
         }
-        quantity = this.stocks.get(i).getStockQuantity();
-        this.stocks.get(i).setStockQuantity(quantity-1);
     }
 
     private void sendOrder(Order order){
         this.orders.add(order);
     }
 
-    private Ticket charge(String typePay, int totalAmount){
-       return this.cashBox.generateTicket(totalAmount, typePay);
+
+    private Ticket charge(int totalAmount, String typePay){
+        return this.cashBox.generateTicket(totalAmount, typePay);
     }
 
-    private Sandwich selectSandwich(int id){
-        int i = 0;
-        Sandwich sandwich;
-        while (i < this.sandwiches.size() && this.sandwiches.get(i).getIdSandwich() != id){
-           i++;
-        }
-        sandwich = this.sandwiches.get(i);
-            System.out.println("You choose: " + sandwich + "which has : " + sandwich.getIngredients());
 
+    private Sandwich selectSandwich(int id) throws NoMoreStockException {
+        Sandwich sandwich = null;
+
+        if(this.stocks.isEmpty()) {
+            throw new NoMoreStockException("You are out of stock");
+        }
+        if(!thereStock(id)) {
+            System.out.println("No more stock of the sandwich number " + id);
+        }else {
+            sandwich = this.sandwiches.get(id);
+            System.out.println("You choose sandwich number " + sandwich.getIdSandwich());
+        }
         return sandwich;
     }
 
+    private boolean thereStock(int id) {
+        return this.stocks.containsKey(id);
+    }
+
     private void showMenu(){
-        for(Sandwich s : this.sandwiches){
+        for(Map.Entry<Integer, Sandwich> s : this.sandwiches.entrySet()){
             System.out.println(s.toString());
-            for(Ingredient i : s.getIngredients()){
-                System.out.println(i.getName());
-            }
         }
     }
 
-    public int sandwichRandom(){
-        Random rand1 = new Random();
-        int n1 = rand1.nextInt(5);
-     return n1;
+    public int sandwichRandom() {
+        return (int)(Math.random()*(5-1+1)+1);
     }
 
 }
