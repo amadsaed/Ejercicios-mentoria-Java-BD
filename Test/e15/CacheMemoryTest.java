@@ -1,12 +1,9 @@
 package e15;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class CacheMemoryTest {
 
@@ -15,7 +12,7 @@ public class CacheMemoryTest {
     private static UserInfoBo userInfoBo;
     private static UserInfoDTO userInfoDTO;
 
-    @BeforeAll
+    @BeforeClass
     public static void setAttributes(){
         userInfoDTO= new UserInfoDTO();
         userInfoDTO.setName("amad");

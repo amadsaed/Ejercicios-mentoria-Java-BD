@@ -1,18 +1,17 @@
 package e15;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
 
 public class FileDAOTest {
 
     private static FileDAO fileDAO;
 
-    @BeforeAll
+    @BeforeClass
     public static void setAttributes() throws IOException {
         fileDAO= new FileDAO("C:\\Users\\Ahmad Saed\\Desktop\\newProject\\src\\e15\\resource\\data.csv" ,null);
         fileDAO.openFile();

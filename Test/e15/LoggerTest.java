@@ -1,8 +1,9 @@
 package e15;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 
 import java.io.IOException;
 
@@ -10,11 +11,11 @@ public class LoggerTest {
 
     private static Logger logger;
 
-    @BeforeAll
+    @BeforeClass
     public static void setAttributes() throws IOException {
         logger = new Logger("C:\\Users\\Ahmad Saed\\Desktop\\newProject\\Test\\outputTest");
     }
-    @AfterAll
+    @AfterClass
     public static void closeResources (){
         logger.closeLog();
     }
