@@ -16,7 +16,7 @@ public class EmpleadoDAOTest {
     }
 
     @Test
-    public void consultaPorCodigoTest() throws NotFoundException, NoConnectionException {
+    public void consultaPorCodigoTest() throws NotFoundException, DataBaseException {
 
         Empleado empleado = mySQLEmpleadoDAO.consultarPorClavePrimaria(2);
         System.out.println(empleado.toString());
@@ -24,18 +24,18 @@ public class EmpleadoDAOTest {
     }
 
     @Test
-    public void crearEmpleadoTest() throws NotFoundException, NoConnectionException {
+    public void crearEmpleadoTest() throws NotFoundException, DataBaseException {
         Empleado empleado = new Empleado(5,555,66,"hana","saed","c","q","prokarma","CABA");
        assertTrue(mySQLEmpleadoDAO.crear(empleado));
     }
 
     @Test
-    public void eliminarEmpleadoTest() throws NotFoundException, NoConnectionException {
+    public void eliminarEmpleadoTest() throws NotFoundException, DataBaseException {
        assertTrue(mySQLEmpleadoDAO.eliminar(5));
     }
 
     @Test
-    public void actualizarEmpleadoTest() throws NotFoundException, NoConnectionException{
+    public void actualizarEmpleadoTest() throws NotFoundException, DataBaseException {
         Empleado empleado = new Empleado(5,555,66,"hana","saed","c","q","prokarma","CORDOBA");
         assertTrue(mySQLEmpleadoDAO.actualizar(empleado));
     }

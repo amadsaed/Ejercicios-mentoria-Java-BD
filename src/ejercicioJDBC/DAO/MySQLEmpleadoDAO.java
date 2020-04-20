@@ -12,7 +12,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
 
 
     @Override
-    public boolean crear(Empleado e) throws NotFoundException, NoConnectionException {
+    public boolean crear(Empleado e) throws  DataBaseException {
     Connection connection = null;
     try {
         connection = MySQLDAOFactory.createConnection();
@@ -28,7 +28,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
         prst.setString(9,e.getCiudad());
         return prst.executeUpdate()>0;
     } catch (SQLException ex) {
-        throw new NotFoundException("error en la base de datos ", ex);
+        throw new DataBaseException("error en la base de datos ", ex);
         //ex.printStackTrace();
     }finally {
         try {
@@ -36,14 +36,14 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
                 connection.close();
             }
         } catch (SQLException ex) {
-            throw new NoConnectionException("error en la base de datos ", ex);
+            throw new DataBaseException("error en la base de datos ", ex);
         }
     }
 
     }
 
     @Override
-    public boolean eliminar(Integer codigo) throws NotFoundException , NoConnectionException{
+    public boolean eliminar(Integer codigo) throws  DataBaseException {
         Connection connection=null;
         try {
             connection = MySQLDAOFactory.createConnection();
@@ -55,7 +55,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
             }
              */
         } catch (SQLException e) {
-            throw new NotFoundException("error en la base de datos ", e);
+            throw new DataBaseException("error en la base de datos ", e);
             //e.printStackTrace();
         }finally {
             try {
@@ -63,17 +63,18 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
                     connection.close();
                 }
             } catch (SQLException ex) {
-                throw new NoConnectionException("error en la base de datos ", ex);
+                throw new DataBaseException("error en la base de datos ", ex);
             }
         }
     }
 
     @Override
-    public Empleado consultarPorClavePrimaria(Integer codigo) throws NotFoundException, NoConnectionException  {
+    public Empleado consultarPorClavePrimaria(Integer codigo) throws NotFoundException, DataBaseException {
         Connection connection= null;
         Empleado empleado = new Empleado();
         try {
-            connection = MySQLDAOFactory.createConnection();        PreparedStatement prst = connection.prepareStatement(SELECT);
+            connection = MySQLDAOFactory.createConnection();
+            PreparedStatement prst = connection.prepareStatement(SELECT);
         prst.setInt(1 ,codigo);
         ResultSet rs = prst.executeQuery();
         if (rs.next()){
@@ -87,10 +88,10 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
             empleado.setAgencia(rs.getString("agencia"));
             empleado.setCiudad(rs.getString("ciudad"));
         }else{
-            System.out.println("no se encontró el empleado");
+            throw new NotFoundException("error en la base de datos ");
         }
     } catch (SQLException e) {
-            throw new NotFoundException("error en la base de datos ", e);
+            throw new DataBaseException("error en la base de datos ", e);
 
             // e.printStackTrace();
         }finally {
@@ -99,7 +100,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
                     connection.close();
                 }
             } catch (SQLException ex) {
-                throw new NoConnectionException("error en la base de datos ", ex);
+                throw new DataBaseException("error en la base de datos ", ex);
                 //ex.printStackTrace();
             }
 
@@ -108,7 +109,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
     }
 
     @Override
-    public boolean actualizar(Empleado e) throws NotFoundException, NoConnectionException  {
+    public boolean actualizar(Empleado e) throws  DataBaseException {
         Connection connection = null;
         try {
             connection = MySQLDAOFactory.createConnection();
@@ -124,7 +125,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
             prst.setInt(9,e.getCodigo());
             return prst.executeUpdate()>0;
         } catch (SQLException ex) {
-            throw new NotFoundException("error en la base de datos ", ex);
+            throw new DataBaseException("error en la base de datos ", ex);
             //ex.printStackTrace();
         }finally {
             try {
@@ -132,7 +133,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
                     connection.close();
                 }
             } catch (SQLException ex) {
-                throw new NoConnectionException("error en la base de datos ", ex);
+                throw new DataBaseException("error en la base de datos ", ex);
                 // ex.printStackTrace();
             }
         }
