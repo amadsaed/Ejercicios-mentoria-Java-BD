@@ -1,5 +1,7 @@
 package ejercicioJDBC.DAO;
 
+import java.util.List;
+
 public class Empleado {
     private int codigo;
     private int dni ;
@@ -10,11 +12,14 @@ public class Empleado {
     private String centralSindical;
     private String agencia;
     private String ciudad;
+    private List<Titulo> titulo ;
+    private int telefono;
+    private Prestamo prestamo;
 
     public Empleado() {
     }
 
-    public Empleado(int codigo, int dni, int nss, String nombre, String apellido, String categoria, String centralSindical, String agencia, String ciudad) {
+    public Empleado(int codigo, int dni, int nss, String nombre, String apellido, String categoria, String centralSindical, String agencia, String ciudad , List<Titulo> titulo) {
         this.codigo = codigo;
         this.dni = dni;
         this.nss = nss;
@@ -24,6 +29,7 @@ public class Empleado {
         this.centralSindical = centralSindical;
         this.agencia = agencia;
         this.ciudad = ciudad;
+        this.titulo = titulo;
     }
 
     public int getCodigo() {
@@ -96,6 +102,30 @@ public class Empleado {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public List<Titulo> getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(List<Titulo> titulo) {
+        this.titulo = titulo;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public Prestamo getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
     }
 
     public String toString(){

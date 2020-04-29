@@ -1,6 +1,8 @@
 package ejercicioJDBC.DAO;
 
-public interface DAO < T , v> {
+public interface ModificationDAO< T , v> {
+
+    //un DAO para modificar y hacer cambios en la misma tabla en la base de datos
 
     public boolean crear ( T e) throws  DataBaseException;
 

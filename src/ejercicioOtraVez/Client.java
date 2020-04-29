@@ -1,6 +1,4 @@
 package ejercicioOtraVez;
-
-
 public class Client {
 
     private int availableAmount;
@@ -28,6 +26,10 @@ public class Client {
         num = (int)(Math.random()*(5-1+1)+1);
         System.out.println("i want " + num + " sandwich");
         return num;
+    }
+
+    public int sandwichRandom() {
+        return (int)(Math.random()*(5-1+1)+1);
     }
 
     public String showPay() {

@@ -2,7 +2,7 @@ package ejercicioJDBC.DAO;
 
 import java.sql.*;
 
-public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
+public class MySQLEmpleadoModificationDAO implements ModificationDAO<Empleado , Integer> {
 
 
     private static final String INSERT = "INSERT INTO empleado (codigo,dni,nss,nombre,apellido,categoria,centralSindical,agencia,ciudad) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -15,7 +15,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
     public boolean crear(Empleado e) throws  DataBaseException {
     Connection connection = null;
     try {
-        connection = MySQLDAOFactory.createConnection();
+        connection = EmpleadoDAOFactory.createConnection();
         PreparedStatement prst = connection.prepareStatement(INSERT);
         prst.setInt(1, e.getCodigo());
         prst.setInt(2, e.getDni());
@@ -46,7 +46,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
     public boolean eliminar(Integer codigo) throws  DataBaseException {
         Connection connection=null;
         try {
-            connection = MySQLDAOFactory.createConnection();
+            connection = EmpleadoDAOFactory.createConnection();
             PreparedStatement prst = connection.prepareStatement(DELETE);
             prst.setInt(1, codigo);
             return prst.executeUpdate()>0;
@@ -73,10 +73,10 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
         Connection connection= null;
         Empleado empleado = new Empleado();
         try {
-            connection = MySQLDAOFactory.createConnection();
+            connection = EmpleadoDAOFactory.createConnection();
             PreparedStatement prst = connection.prepareStatement(SELECT);
-        prst.setInt(1 ,codigo);
-        ResultSet rs = prst.executeQuery();
+            prst.setInt(1 ,codigo);
+            ResultSet rs = prst.executeQuery();
         if (rs.next()){
             empleado.setCodigo(rs.getInt("codigo"));
             empleado.setDni(rs.getInt("dni"));
@@ -112,7 +112,7 @@ public class MySQLEmpleadoDAO implements DAO <Empleado , Integer>{
     public boolean actualizar(Empleado e) throws  DataBaseException {
         Connection connection = null;
         try {
-            connection = MySQLDAOFactory.createConnection();
+            connection = EmpleadoDAOFactory.createConnection();
             PreparedStatement prst = connection.prepareStatement(UPDATE);
             prst.setInt(1, e.getDni());
             prst.setInt(2,e.getNss());

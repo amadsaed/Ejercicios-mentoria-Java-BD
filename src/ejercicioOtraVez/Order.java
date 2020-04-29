@@ -14,11 +14,27 @@ public class Order {
         this.isReady = false;
     }
 
-    public void setReady(boolean ready) {
-        isReady = ready;
-    }
-
     public List<Sandwich> getSandwiches() {
         return sandwiches;
+    }
+
+    public void setSandwiches(List<Sandwich> sandwiches) {
+        this.sandwiches = sandwiches;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    public boolean isReady() {
+        return isReady;
+    }
+
+    public void setReady(boolean ready) {
+        isReady = ready;
     }
 }

@@ -5,13 +5,16 @@ public abstract class DAOFactory {
     public static final int ORACLE = 2 ;
 
 
-    public abstract DAO getEmpleadoDAO ();
-    public abstract DAO getAgenciaDAO();
+    public abstract ModificationDAO getEmpleadoModificationDAO ();
+    public abstract ModificationDAO getAgenciaModificationDAO();
+
+    public abstract CreationDAO getEmpleadoCreationDAO();
+    public abstract CreationDAO getAgenciaCreationDAO();
 
     public static DAOFactory getDAOFactory ( int dataBase){
         switch (dataBase){
             case MYSQL :
-                return new MySQLDAOFactory();
+                return new EmpleadoDAOFactory();
             case ORACLE :
                //return new OracleDAOFactory();
             default:

@@ -1,5 +1,7 @@
 package ejercicioOtraVez;
 
+import ejercicioOtraVez.DAO.SandwichDAO;
+
 import java.util.List;
 
 public class Sandwich {
@@ -8,6 +10,10 @@ public class Sandwich {
     private Boolean isReady;
     private int price ;
     private int idSandwich;
+    private SandwichDAO sandwichDAO;
+
+    public Sandwich() {
+    }
 
     public Sandwich(int id, int price, List<Ingredient> ingredients){
         this.idSandwich = id;

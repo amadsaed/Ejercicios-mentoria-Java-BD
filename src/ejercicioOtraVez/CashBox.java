@@ -1,14 +1,19 @@
 package ejercicioOtraVez;
 
+import ejercicioOtraVez.DAO.DataBaseException;
+import ejercicioOtraVez.DAO.TicketDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CashBox {
 
     private List<Ticket> tickets;
+    private TicketDAO ticketDAO;
 
     public CashBox() {
-        this.tickets = new ArrayList<>();
+        this.tickets = new ArrayList<Ticket>();
+        this.ticketDAO = new TicketDAO();
     }
 
     public Ticket generateTicket(int amount, String typePay){
@@ -17,18 +22,23 @@ public class CashBox {
         return ticket;
     }
 
-    public void saveTicket(Ticket ticket){
-        this.tickets.add(ticket);
+    public void saveTicket(Ticket ticket){//insert ticket into database
+        try {
+            this.ticketDAO.insert(ticket);
+        } catch (DataBaseException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public int calculateTotal(){
         int total = 0;
         for (int i = 0 ; i < tickets.size() ; i++){
-           total += tickets.get(i).getAmount();
+            total += tickets.get(i).getAmount();
         }
         return total;
     }
-     public String toString(){
-        return "$" + this.calculateTotal();
-     }
+
+    public String toString() {
+        return "$ " + calculateTotal();
+    }
 }

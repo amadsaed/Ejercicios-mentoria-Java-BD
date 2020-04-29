@@ -21,12 +21,22 @@ public class AgenciaDAOFactory extends DAOFactory {
     }
 
     @Override
-    public DAO getEmpleadoDAO() {
+    public ModificationDAO getEmpleadoModificationDAO() {
         return null;
     }
 
     @Override
-    public DAO getAgenciaDAO() {
+    public ModificationDAO getAgenciaModificationDAO() {
+        return null;
+    }
+
+    @Override
+    public CreationDAO getEmpleadoCreationDAO() {
+        return null;
+    }
+
+    @Override
+    public CreationDAO getAgenciaCreationDAO() {
         return null;
     }
 }

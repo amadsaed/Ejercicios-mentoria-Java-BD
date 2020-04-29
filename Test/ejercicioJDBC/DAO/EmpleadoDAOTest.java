@@ -7,18 +7,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class EmpleadoDAOTest {
-    private static DAO<Empleado,Integer> mySQLEmpleadoDAO;
+
+    private static ModificationDAO<Empleado,Integer> mySQLEmpleadoModificationDAO;
 
     @BeforeClass
     public static void configurarTest(){
         DAOFactory factory= DAOFactory.getDAOFactory(MYSQL);
-        mySQLEmpleadoDAO = factory.getEmpleadoDAO();
+        mySQLEmpleadoModificationDAO = factory.getEmpleadoDAO();
     }
 
     @Test
     public void consultaPorCodigoTest() throws NotFoundException, DataBaseException {
 
-        Empleado empleado = mySQLEmpleadoDAO.consultarPorClavePrimaria(2);
+        Empleado empleado = mySQLEmpleadoModificationDAO.consultarPorClavePrimaria(2);
         System.out.println(empleado.toString());
         assertEquals(2,empleado.getCodigo());
     }
@@ -26,17 +27,17 @@ public class EmpleadoDAOTest {
     @Test
     public void crearEmpleadoTest() throws NotFoundException, DataBaseException {
         Empleado empleado = new Empleado(5,555,66,"hana","saed","c","q","prokarma","CABA");
-       assertTrue(mySQLEmpleadoDAO.crear(empleado));
+       assertTrue(mySQLEmpleadoModificationDAO.crear(empleado));
     }
 
     @Test
     public void eliminarEmpleadoTest() throws NotFoundException, DataBaseException {
-       assertTrue(mySQLEmpleadoDAO.eliminar(5));
+       assertTrue(mySQLEmpleadoModificationDAO.eliminar(5));
     }
 
     @Test
     public void actualizarEmpleadoTest() throws NotFoundException, DataBaseException {
         Empleado empleado = new Empleado(5,555,66,"hana","saed","c","q","prokarma","CORDOBA");
-        assertTrue(mySQLEmpleadoDAO.actualizar(empleado));
+        assertTrue(mySQLEmpleadoModificationDAO.actualizar(empleado));
     }
 }

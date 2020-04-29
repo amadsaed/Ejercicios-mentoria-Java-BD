@@ -1,11 +1,10 @@
 package ejercicioJDBC.DAO;
 
-public class MySQLAgenciaDAO implements DAO <Agencia , String>{
+public class MySQLAgenciaModificationDAO implements ModificationDAO<Agencia , String> {
 
     private MySQLAgenciaDAOFactory mySQLAgenciaDAOFactory;
 
     private static final String SELECT = "SELECT * FROM agencia WHERE nombre = ?";
-
 
     @Override
     public boolean crear(Agencia e) {
