@@ -48,8 +48,9 @@ public class TicketDAO implements DAO<Ticket , Integer> {
     }
 
     @Override
-    public Ticket creat(ResultSet rs) throws SQLException {
+    public Ticket create(ResultSet rs) throws SQLException {
         return null;
     }
+
 
 }

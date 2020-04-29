@@ -60,7 +60,8 @@ public class OrderRegisterSandwichDAO implements DAO <Order,Integer > {
     }
 
     @Override
-    public Order creat(ResultSet rs) throws SQLException {
+    public Order create(ResultSet rs) throws SQLException {
         return null;
     }
+
 }
