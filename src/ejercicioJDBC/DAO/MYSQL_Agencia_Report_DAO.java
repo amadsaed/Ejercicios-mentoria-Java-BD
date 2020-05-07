@@ -1,6 +1,6 @@
 package ejercicioJDBC.DAO;
 
-public class MYSQLAgenciaCreationDAO implements CreationDAO <Agencia,String> {
+public class MYSQL_Agencia_Report_DAO implements Report_DAO<Agencia,String> {
 
     @Override
     public Empleado consultarEducacion(String pk) throws DataBaseException, NotFoundException {

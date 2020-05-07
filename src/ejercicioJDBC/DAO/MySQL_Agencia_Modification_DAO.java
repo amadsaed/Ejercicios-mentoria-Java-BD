@@ -1,8 +1,8 @@
 package ejercicioJDBC.DAO;
 
-public class MySQLAgenciaModificationDAO implements ModificationDAO<Agencia , String> {
+public class MySQL_Agencia_Modification_DAO implements Modification_DAO<Agencia , String> {
 
-    private MySQLAgenciaDAOFactory mySQLAgenciaDAOFactory;
+    private MySQL_Agencia_DAO_Factory mySQLAgenciaDAOFactory;
 
     private static final String SELECT = "SELECT * FROM agencia WHERE nombre = ?";
 

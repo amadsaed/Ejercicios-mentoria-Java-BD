@@ -1,9 +1,14 @@
 package ejercicioOtraVez;
 
+
 public class Stock {
 
     private int idSandwich;
     private int stockQuantity;
+
+    public Stock(int id) {
+        this.idSandwich = id;
+    }
 
     public Stock(int id, int stock){
         this.idSandwich = id;

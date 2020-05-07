@@ -1,8 +1,10 @@
-package ejercicioOtraVez.DAO;
+package ejercicioJDBC.DAO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class MySQLDAOFactory extends DAOFactory {
+public class Empleado_DAO_Factory extends DAO_Factory {
 
     public static final String DRIVER = "com.mysql.jdbc.Driver";
     public static final String URL = "jdbc:mysql://localhost:3306/test";
@@ -18,35 +20,22 @@ public class MySQLDAOFactory extends DAOFactory {
         return con;
     }
 
-   public static void closeConnection (Connection conn , PreparedStatement ps , ResultSet rs){
-        try{
-            conn.close();
-            ps.close();
-            rs.close();
-        }
-        catch (SQLException e){
-            e.printStackTrace();// excepcion nuestra
-        }
-    }
-
-
     @Override
-    public DAO getSandwichDAO() {
-        return new SandwichDAO();
+    public Modification_DAO getEmpleadoModificationDAO() {
+       return null;
     }
 
     @Override
-    public DAO getOrderRegisterSandwichDAO() {
+    public Modification_DAO getAgenciaModificationDAO() {
         return null;
     }
 
     @Override
-    public DAO getOrderDAO() {
+    public Report_DAO getEmpleadoCreationDAO() {
         return null;
     }
-
     @Override
-    public DAO getTicketDAO() {
+    public Report_DAO getAgenciaCreationDAO() {
         return null;
     }
 }

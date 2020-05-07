@@ -1,40 +1,40 @@
 package ejercicioOtraVez;
 
-import java.util.List;
+import java.util.Map;
 
 public class Order {
 
-    private List<Sandwich> sandwiches;
+    private Map<Integer, Integer> sandwiches;
     private Ticket ticket;
     private boolean isReady;
 
-    public Order(List<Sandwich> sandwiches, Ticket ticket) {
+    public Order(Map<Integer, Integer> sandwiches, Ticket ticket) {
         this.sandwiches = sandwiches;
         this.ticket = ticket;
         this.isReady = false;
     }
 
-    public List<Sandwich> getSandwiches() {
+    public void setReady(boolean ready) {
+        this.isReady = ready;
+    }
+    public Map<Integer, Integer> getSandwiches() {
         return sandwiches;
     }
-
-    public void setSandwiches(List<Sandwich> sandwiches) {
-        this.sandwiches = sandwiches;
-    }
-
     public Ticket getTicket() {
         return ticket;
     }
-
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
-
     public boolean isReady() {
         return isReady;
     }
+    public void setSandwiches(Map<Integer, Integer> sandwiches) {
+        this.sandwiches = sandwiches;
+    }
 
-    public void setReady(boolean ready) {
-        isReady = ready;
+    public String toString() {
+        return this.ticket.toString() +
+                "\nSandwiches: " + this.sandwiches.toString();
     }
 }

@@ -2,24 +2,22 @@ package ejercicioOtraVez.DAO;
 
 public abstract class DAOFactory {
 
-    public static final int MYSQL = 1 ;
-    public static final int ORACLE = 2 ;
+    private static final int MySql = 1;
 
+    public abstract MySqlSandwichDAO getSandwichDAO();
+    public abstract MySqlOrderDAO getOrderDAO();
+    public abstract MySqlTicketDAO getTicketDAO();
 
-    public abstract DAO getSandwichDAO();
-    public abstract DAO getOrderRegisterSandwichDAO();
-    public abstract DAO getOrderDAO();
-    public abstract DAO getTicketDAO();
+    public static DAOFactory getDAOFactory(int DB) throws DataBaseException {
+        switch(DB) {
 
+            case MySql:
+                return new MySqlDAOFactory();
 
-    public static DAOFactory getDAOFactory ( int dataBase){
-        switch (dataBase){
-            case MYSQL :
-                return new MySQLDAOFactory();
-            case ORACLE :
-                //return new OracleDAOFactory();
             default:
-                return null;
+                throw new DataBaseException("error, No database selected ");
         }
     }
+
+
 }

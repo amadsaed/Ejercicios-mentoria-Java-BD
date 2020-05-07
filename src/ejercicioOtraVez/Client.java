@@ -24,7 +24,11 @@ public class Client {
     public int intRandom(){
         int num;
         num = (int)(Math.random()*(5-1+1)+1);
-        System.out.println("i want " + num + " sandwich");
+        if (num==1){
+            System.out.println("i want " + num + " sandwich");
+        }else {
+            System.out.println("i want " + num + " sandwiches");
+        }
         return num;
     }
 

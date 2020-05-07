@@ -1,6 +1,6 @@
 package ejercicioJDBC.DAO;
 
-public interface ModificationDAO< T , v> {
+public interface Modification_DAO< T , v> {
 
     //un DAO para modificar y hacer cambios en la misma tabla en la base de datos
 

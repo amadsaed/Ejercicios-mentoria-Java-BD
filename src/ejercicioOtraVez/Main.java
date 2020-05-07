@@ -1,12 +1,11 @@
 package ejercicioOtraVez;
 
-
-import ejercicioOtraVez.DAO.DAO;
 import ejercicioOtraVez.DAO.DataBaseException;
-import ejercicioOtraVez.DAO.MySQLDAOFactory;
+import ejercicioOtraVez.DAO.MySqlDAOFactory;
+import ejercicioOtraVez.DAO.MySqlSandwichDAO;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class Main {
 
@@ -15,20 +14,18 @@ public class Main {
         ExecutionContext app = null;
 
         try {
-            app = new ExecutionContext(generateSandwiches());
-            Thread.sleep(5000);
+            app = new ExecutionContext(generateSandwichesFromDataBase());
+            Thread.sleep(3000);
         } catch (InterruptedException | DataBaseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         app.startExecution();
     }
 
-    public static List<Sandwich> generateSandwiches() throws DataBaseException{
-        List<Sandwich> sandwiches = new ArrayList<Sandwich>();
-        MySQLDAOFactory myDAO = new MySQLDAOFactory();
-        DAO sandwichDAO = myDAO.getSandwichDAO();
-        return sandwichDAO.getAll();
+    public static List<Sandwich> generateSandwichesFromDataBase() throws DataBaseException{
+        MySqlDAOFactory myDAO = new MySqlDAOFactory();
+        MySqlSandwichDAO sandwichDAO = myDAO.getSandwichDAO();
+        return sandwichDAO.getAllSandwiches();
     }
 
 }

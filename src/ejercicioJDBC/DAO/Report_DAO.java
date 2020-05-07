@@ -1,7 +1,7 @@
 package ejercicioJDBC.DAO;
 
 // un DAO para crear nuevos registros y filas  en nueva tabla en la base de datos
-public interface CreationDAO < T , v > {
+public interface Report_DAO< T , v > {
 
     public Empleado consultarEducacion ( v pk)  throws  DataBaseException , NotFoundException;
 

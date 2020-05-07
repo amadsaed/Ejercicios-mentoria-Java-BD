@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class AgenciaDAOFactory extends DAOFactory {
+public class Agencia_DAO_Factory extends DAO_Factory {
 
     public static final String DRIVER = "com.mysql.jdbc.Driver";
     public static final String URL = "jdbc:mysql://localhost:3306/test";
@@ -21,22 +21,22 @@ public class AgenciaDAOFactory extends DAOFactory {
     }
 
     @Override
-    public ModificationDAO getEmpleadoModificationDAO() {
+    public Modification_DAO getEmpleadoModificationDAO() {
         return null;
     }
 
     @Override
-    public ModificationDAO getAgenciaModificationDAO() {
+    public Modification_DAO getAgenciaModificationDAO() {
         return null;
     }
 
     @Override
-    public CreationDAO getEmpleadoCreationDAO() {
+    public Report_DAO getEmpleadoCreationDAO() {
         return null;
     }
 
     @Override
-    public CreationDAO getAgenciaCreationDAO() {
+    public Report_DAO getAgenciaCreationDAO() {
         return null;
     }
 }

@@ -1,23 +1,25 @@
 package ejercicioOtraVez.DAO;
 
-public class DataBaseException extends Exception{
+public class CanNotReciveDataException extends Exception{
+
 
     private static final long serialVersionUID = 1L;
 
 
-    public DataBaseException(String arg0, Throwable arg1) {
+    public CanNotReciveDataException(String arg0, Throwable arg1) {
         super(arg0, arg1);
         // TODO Auto-generated constructor stub
     }
 
-    public DataBaseException(String arg0) {
+    public CanNotReciveDataException(String arg0) {
         super(arg0);
         // TODO Auto-generated constructor stub
     }
 
-    public DataBaseException(Throwable arg0) {
+    public CanNotReciveDataException(Throwable arg0) {
         super(arg0);
         // TODO Auto-generated constructor stub
     }
+
 
 }

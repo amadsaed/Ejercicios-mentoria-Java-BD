@@ -1,23 +1,25 @@
 package ejercicioOtraVez;
 
 import ejercicioOtraVez.DAO.DataBaseException;
-import ejercicioOtraVez.DAO.TicketDAO;
+import ejercicioOtraVez.DAO.MySqlTicketDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CashBox {
 
     private List<Ticket> tickets;
-    private TicketDAO ticketDAO;
+    private MySqlTicketDAO ticketDAO;
 
-    public CashBox() {
+
+    public CashBox(MySqlTicketDAO ticketDAO) {
         this.tickets = new ArrayList<Ticket>();
-        this.ticketDAO = new TicketDAO();
+        this.ticketDAO = ticketDAO;
     }
 
     public Ticket generateTicket(int amount, String typePay){
-        Ticket ticket = new Ticket(amount, typePay);
+        Ticket ticket = new Ticket( amount, typePay);
         saveTicket(ticket);
         return ticket;
     }

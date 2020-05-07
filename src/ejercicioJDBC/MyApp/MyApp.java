@@ -1,9 +1,5 @@
 package ejercicioJDBC.MyApp;
 
-import ejercicioJDBC.DAO.*;
-
-import static ejercicioJDBC.DAO.DAOFactory.*;
-
 public class MyApp {
 
 

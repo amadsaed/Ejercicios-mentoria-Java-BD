@@ -1,56 +1,39 @@
 package ejercicioOtraVez.DAO;
+
 import ejercicioOtraVez.Ticket;
-import java.sql.*;
-import java.util.List;
 
-public class TicketDAO implements DAO<Ticket , Integer> {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-    private static final String INSERT = "INSERT INTO ticket (number , amount , type_pay , date) VALUES (?,?,?,?)";
+
+public class TicketDAO implements MySqlTicketDAO {
+
+    private static final String INSERT = "INSERT INTO tickets(amount, type_pay, date) VALUES(?, ?, ?)";
+
 
     @Override
-    public boolean insert(Ticket ticket) throws DataBaseException {
+    public void insert(Ticket t) throws DataBaseException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = MySQLDAOFactory.createConnection();
+            conn = MySqlDAOFactory.openConnection();
             ps = conn.prepareStatement(INSERT);
-            ps.setInt(1, ticket.getNumber());
-            ps.setInt(2, ticket.getAmount());
-            ps.setString(3, ticket.getTypePay());
-            ps.setDate(4, ticket.getDate());
-            return ps.executeUpdate() > 0;
-        } catch (SQLException ex) {
-            throw new DataBaseException("error en data base ", ex);
+            ps.setInt(1, t.getAmount());
+            ps.setString(2, t.getTypePay());
+            ps.setTimestamp(3, t.getDate());
+            if(ps.executeUpdate() != 0) {
+                System.out.println("Ticket saved successfully");
+            }else {
+                throw new DataBaseException("Error saving the ticket");
+            }
+        }catch (SQLException e) {
+            throw new DataBaseException("Error into the database", e);
         } finally {
-            MySQLDAOFactory.closeConnection(conn, ps, rs);
+            MySqlDAOFactory.closeConnections(conn, ps, null);
         }
     }
-
-    @Override
-    public boolean update(Ticket ticket) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Integer id) {
-        return false;
-    }
-
-    @Override
-    public List<Ticket> getAll() {
-        return null;
-    }
-
-    @Override
-    public Ticket getSandwichByID(Integer id) {
-        return null;
-    }
-
-    @Override
-    public Ticket create(ResultSet rs) throws SQLException {
-        return null;
-    }
-
 
 }

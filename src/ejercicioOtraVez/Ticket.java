@@ -1,24 +1,46 @@
 package ejercicioOtraVez;
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 public class Ticket {
-    private int number;
-    private int amount ;
-    private String typePay;
-    private Date date;
 
-    public Ticket(int amount, String typePay){
+    private int number;
+    private int amount;
+    private String typePay;
+    private Timestamp date;
+
+    public Ticket(int amount, String typePay) {
         this.amount = amount;
         this.typePay = typePay;
-        this.number = number+1;
+        this.date = new Timestamp(System.currentTimeMillis());//se cambio el date por tipo de dato Timestamp aca y en la base de datos
     }
 
-    public int getNumber() {
-        return number;
+    public String getTypePay() {
+        return typePay;
+    }
+
+
+
+    public void setTypePay(String typePay) {
+        this.typePay = typePay;
+    }
+
+
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     public int getAmount() {
@@ -29,19 +51,12 @@ public class Ticket {
         this.amount = amount;
     }
 
-    public String getTypePay() {
-        return typePay;
+    public String toString() {
+        return "Ticket number: " + this.number + "\nType pay: " + this.typePay + "\nTotal: " + this.amount;
     }
 
-    public void setTypePay(String typePay) {
-        this.typePay = typePay;
-    }
 
-    public java.sql.Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+
+
 }

@@ -7,6 +7,10 @@ public class Titulo {
     public Titulo() {
     }
 
+    public Titulo(String nombre_titulo) {
+        this.nombre_titulo = nombre_titulo;
+    }
+
     public Titulo(int id_titulo, String nombre_titulo) {
         this.id_titulo = id_titulo;
         this.nombre_titulo = nombre_titulo;

@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLEmpleadoCreationDAO implements CreationDAO < Empleado , Integer> {
+public class MySQL_Empleado_Report_DAO implements Report_DAO< Empleado , Integer> {
 
     private static final String EDUCACION = "SELECT e.nombre , t.nombre_titulo FROM empleado e \n" +
                                             "INNER JOIN empleado_titulo et ON e.codigo=et.codigo_empleado\n" +
-                                            "INNER JOIN titulo t ON t.id_titulo=et.id_titulo WHERE e.codigo= ? \n"+
-                                            "GROUP BY e.nombre";
+                                            "INNER JOIN titulo t ON t.id_titulo=et.id_titulo WHERE e.codigo= ? ";
+
 
     private static final String TRABAJO = " SELECT e.nombre , a.nombre_agencia , a.nro_telefono , c.nombre_ciudad FROM empleado e , agencia a , ciudad c" +
                                             " WHERE e.agencia=a.nombre_agencia AND e.ciudad=c.nombre_ciudad AND e.codigo=? ";
@@ -26,17 +26,15 @@ public class MySQLEmpleadoCreationDAO implements CreationDAO < Empleado , Intege
         Connection connection= null;
         Empleado empleado = new Empleado();
         try {
-            connection = EmpleadoDAOFactory.createConnection();
+            connection = Empleado_DAO_Factory.createConnection();
             PreparedStatement prst = connection.prepareStatement(EDUCACION);
             prst.setInt(1 ,codigo);
             ResultSet rs = prst.executeQuery();
             if (rs.next()){
                 empleado.setNombre(rs.getString("nombre"));
                 List<Titulo> titulos = new ArrayList<>();
-                int i=0;
                 do {
-                    titulos.get(i++).setNombre_titulo(rs.getString("nombre_titulo"));
-
+                    titulos.add(new Titulo(rs.getString("nombre_titulo")));
                 }while (rs.next());
                 empleado.setTitulo(titulos);
             }else{
@@ -65,7 +63,7 @@ public class MySQLEmpleadoCreationDAO implements CreationDAO < Empleado , Intege
         Connection connection= null;
         Empleado empleado = new Empleado();
         try {
-            connection = EmpleadoDAOFactory.createConnection();
+            connection = Empleado_DAO_Factory.createConnection();
             PreparedStatement prst = connection.prepareStatement(TRABAJO);
             prst.setInt(1 ,codigo);
             ResultSet rs = prst.executeQuery();
@@ -98,7 +96,7 @@ public class MySQLEmpleadoCreationDAO implements CreationDAO < Empleado , Intege
         Connection connection = null;
         Empleado empleado = new Empleado();
         try {
-            connection = EmpleadoDAOFactory.createConnection();
+            connection = Empleado_DAO_Factory.createConnection();
             PreparedStatement prst = connection.prepareStatement(PRESTAMO);
             prst.setString(1, e.getPrestamo().getTipo());
             ResultSet rs = prst.executeQuery();
@@ -106,7 +104,7 @@ public class MySQLEmpleadoCreationDAO implements CreationDAO < Empleado , Intege
                 Prestamo prestamo = new Prestamo();
                 empleado.setCodigo(rs.getInt("codigo"));
                 empleado.setNombre(rs.getString("nombre"));
-                prestamo.setTipo(rs.getInt("id_prestamo"));
+                prestamo.setId_prestamo(rs.getInt("id_prestamo"));
                 empleado.setPrestamo(prestamo);
             }else{
                 throw new NotFoundException("error en la base de datos ");

@@ -2,7 +2,7 @@ package ejercicioJDBC.DAO;
 
 import java.sql.*;
 
-public class MySQLEmpleadoModificationDAO implements ModificationDAO<Empleado , Integer> {
+public class MySQL_Empleado_Modification_DAO implements Modification_DAO<Empleado , Integer> {
 
 
     private static final String INSERT = "INSERT INTO empleado (codigo,dni,nss,nombre,apellido,categoria,centralSindical,agencia,ciudad) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -15,7 +15,7 @@ public class MySQLEmpleadoModificationDAO implements ModificationDAO<Empleado , 
     public boolean crear(Empleado e) throws  DataBaseException {
     Connection connection = null;
     try {
-        connection = EmpleadoDAOFactory.createConnection();
+        connection = Empleado_DAO_Factory.createConnection();
         PreparedStatement prst = connection.prepareStatement(INSERT);
         prst.setInt(1, e.getCodigo());
         prst.setInt(2, e.getDni());
@@ -46,7 +46,7 @@ public class MySQLEmpleadoModificationDAO implements ModificationDAO<Empleado , 
     public boolean eliminar(Integer codigo) throws  DataBaseException {
         Connection connection=null;
         try {
-            connection = EmpleadoDAOFactory.createConnection();
+            connection = Empleado_DAO_Factory.createConnection();
             PreparedStatement prst = connection.prepareStatement(DELETE);
             prst.setInt(1, codigo);
             return prst.executeUpdate()>0;
@@ -73,7 +73,7 @@ public class MySQLEmpleadoModificationDAO implements ModificationDAO<Empleado , 
         Connection connection= null;
         Empleado empleado = new Empleado();
         try {
-            connection = EmpleadoDAOFactory.createConnection();
+            connection = Empleado_DAO_Factory.createConnection();
             PreparedStatement prst = connection.prepareStatement(SELECT);
             prst.setInt(1 ,codigo);
             ResultSet rs = prst.executeQuery();
@@ -112,7 +112,7 @@ public class MySQLEmpleadoModificationDAO implements ModificationDAO<Empleado , 
     public boolean actualizar(Empleado e) throws  DataBaseException {
         Connection connection = null;
         try {
-            connection = EmpleadoDAOFactory.createConnection();
+            connection = Empleado_DAO_Factory.createConnection();
             PreparedStatement prst = connection.prepareStatement(UPDATE);
             prst.setInt(1, e.getDni());
             prst.setInt(2,e.getNss());
