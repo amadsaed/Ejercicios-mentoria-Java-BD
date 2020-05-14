@@ -1,15 +1,10 @@
 package ejercicioOtraVez;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import ejercicioOtraVez.DAO.CanNotReciveDataException;
+import ejercicioOtraVez.DAO.UpdateDataException;
 import ejercicioOtraVez.DAO.DataBaseException;
-import ejercicioOtraVez.DAO.MySqlDAOFactory;
-import ejercicioOtraVez.DAO.OrderDAO;
-import org.junit.BeforeClass;
+import ejercicioOtraVez.DAO.MysqlOrderDAO;
 import org.junit.Test;
 
 public class CashierTest {
@@ -17,7 +12,7 @@ public class CashierTest {
     private static Cashier cashier;
     private static List<Sandwich> sandwiches;
     private Sandwich sandwich;
-    private static OrderDAO orderDAO;
+    private static MysqlOrderDAO orderDAO;
     private static Order order;
     /*
     @BeforeClass
@@ -49,7 +44,7 @@ public class CashierTest {
  */
 
     @Test
-    public void insertTest()  throws DataBaseException, CanNotReciveDataException {
+    public void insertTest()  throws DataBaseException, UpdateDataException {
         orderDAO.insert(order);
 
     }

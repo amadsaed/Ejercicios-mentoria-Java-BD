@@ -1,7 +1,7 @@
 package ejercicioOtraVez;
 
 import ejercicioOtraVez.DAO.DataBaseException;
-import ejercicioOtraVez.DAO.MySqlTicketDAO;
+import ejercicioOtraVez.DAO.TicketDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
 public class CashBox {
 
     private List<Ticket> tickets;
-    private MySqlTicketDAO ticketDAO;
+    private TicketDAO ticketDAO;
 
 
-    public CashBox(MySqlTicketDAO ticketDAO) {
+    public CashBox(TicketDAO ticketDAO) {
         this.tickets = new ArrayList<Ticket>();
         this.ticketDAO = ticketDAO;
     }

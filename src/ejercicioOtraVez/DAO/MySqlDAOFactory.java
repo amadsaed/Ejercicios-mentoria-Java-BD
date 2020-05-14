@@ -16,18 +16,18 @@ public class MySqlDAOFactory extends DAOFactory {
 
 
     @Override
-    public MySqlSandwichDAO getSandwichDAO() {
-        return new SandwichDAO();
+    public SandwichDAO getSandwichDAO() {
+        return new MysqlSandwichDAO();
     }
 
     @Override
-    public MySqlOrderDAO getOrderDAO() {
-        return new OrderDAO();
+    public OrderDAO getOrderDAO() {
+        return new MysqlOrderDAO();
     }
 
     @Override
-    public MySqlTicketDAO getTicketDAO() {
-        return new TicketDAO();
+    public TicketDAO getTicketDAO() {
+        return new MysqlTicketDAO();
     }
 
 

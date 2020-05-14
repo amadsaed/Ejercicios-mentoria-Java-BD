@@ -14,17 +14,24 @@ public class Cashier extends Thread {
     private CashBox cashBox;
     private List<Sandwich> sandwiches;
     private ExecutionContext executionContext;
-    private MySqlSandwichDAO sandwichDAO;
-    private MySqlOrderDAO orderDAO;
+    private SandwichDAO sandwichDAO;
+    private OrderDAO orderDAO;
+    private DAOFactory mysql;
 
-    public Cashier(ExecutionContext executionContext, BlockingQueue<Order> orders, BlockingQueue<Client> clients, List<Sandwich> sandwiches, DAOFactory mySql) {
+    public Cashier(ExecutionContext executionContext, BlockingQueue<Order> orders, BlockingQueue<Client> clients, List<Sandwich> sandwiches /* DAOFactory mySql */) throws DataBaseException {
         this.orders = orders;
+        this.mysql= getDaoFactory();
         this.clients = clients;
-        this.cashBox = new CashBox(mySql.getTicketDAO());
+        this.cashBox = new CashBox(mysql.getTicketDAO());
         this.sandwiches = sandwiches;
         this.executionContext = executionContext;
-        this.sandwichDAO = mySql.getSandwichDAO();
-        this.orderDAO = mySql.getOrderDAO();
+        this.sandwichDAO = mysql.getSandwichDAO();
+        this.orderDAO = mysql.getOrderDAO();
+    }
+
+  public DAOFactory getDaoFactory() throws DataBaseException {
+        DAOFactory daoFactory = null;
+        return daoFactory = DAOFactory.getDAOFactory(1);
     }
 
     @Override
@@ -81,7 +88,7 @@ public class Cashier extends Thread {
     private void decreaseStock(Map<Integer, Integer> stocks) {
         try {
             this.sandwichDAO.decreaseStock(stocks);
-        } catch (CanNotReciveDataException | DataBaseException e) {
+        } catch (UpdateDataException | DataBaseException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -89,7 +96,7 @@ public class Cashier extends Thread {
     private void sendOrder(Order order) {
         try {
             this.orderDAO.insert(order);
-        } catch (CanNotReciveDataException | DataBaseException e) {
+        } catch (UpdateDataException | DataBaseException e) {
             System.out.println(e.getMessage());
         }
         this.orders.add(order);
@@ -123,7 +130,7 @@ public class Cashier extends Thread {
         boolean resp = false;
         try {
             resp = this.sandwichDAO.getAllSandwichsStock() != 0;
-        } catch (CanNotReciveDataException | DataBaseException e) {
+        } catch (UpdateDataException | DataBaseException e) {
             System.out.println(e.getMessage());
         }
         return resp;

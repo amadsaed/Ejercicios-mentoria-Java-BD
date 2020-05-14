@@ -25,7 +25,7 @@ public class ExecutionContext {
         this.clients = new ArrayBlockingQueue<Client>(1024);
         factory = DAOFactory.getDAOFactory(1);
         this.generator = new ClientGenerator(this, clients, cantClients);
-        this.cashier = new Cashier(this, orders, clients, sandwiches, factory);
+        this.cashier = new Cashier(this, orders, clients, sandwiches);
         this.preparer  = new Preparer(this, orders);
     }
 

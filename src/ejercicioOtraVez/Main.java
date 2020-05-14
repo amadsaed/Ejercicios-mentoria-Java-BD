@@ -2,7 +2,7 @@ package ejercicioOtraVez;
 
 import ejercicioOtraVez.DAO.DataBaseException;
 import ejercicioOtraVez.DAO.MySqlDAOFactory;
-import ejercicioOtraVez.DAO.MySqlSandwichDAO;
+import ejercicioOtraVez.DAO.SandwichDAO;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class Main {
 
     public static List<Sandwich> generateSandwichesFromDataBase() throws DataBaseException{
         MySqlDAOFactory myDAO = new MySqlDAOFactory();
-        MySqlSandwichDAO sandwichDAO = myDAO.getSandwichDAO();
+        SandwichDAO sandwichDAO = myDAO.getSandwichDAO();
         return sandwichDAO.getAllSandwiches();
     }
 
